@@ -12,7 +12,7 @@ FORMAT='[%(asctime)-15s] %(message)s'
 
 URL='https://www.mohfw.gov.in/'
 SHORT_HEADERS=['Sno','State','In','Fr','Cd','Dt']
-FILE_NAME='C:\\Users\\RealMe\\PycharmProjects\\codes\\corona_india_data.json'
+FILE_NAME='FILE_NAME'
 contents_extracted=lambda row:[x.text.replace('\n','')for x in row]
 
 def save(x):
@@ -72,8 +72,7 @@ try:
     for event in info:
         logging.warning(event)
         events_info+='\n - '+ event.replace("'","")
-        print("hello")
-    print("hello123")
+
     if changed:
         for state in cur_data:
                 past_data[state]['latest']=cur_data[state][current_time]
@@ -81,7 +80,7 @@ try:
         save(past_data)
 
         table=tabulate(stats,headers=SHORT_HEADERS,tablefmt='grid')
-        slack_text=f'Please Find CoronaVirus Summary for India below:\n{events_info}\n```{table}```'
+        slack_text=f'Please Find Summary for India below:\n{events_info}\n```{table}```'
         print(slack_text)
         print("hello1224")
         slacker()(slack_text)
@@ -89,4 +88,3 @@ except Exception as e:
     logging.exception("Oops There\'s an Issue With ur Corona Script")
     slacker()(f'Exception Occured:[{e}]')
     print(e)
-    print("hello1")
